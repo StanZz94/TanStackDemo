@@ -18,7 +18,7 @@ export default function NewEventsSection() {
     content = <LoadingIndicator />;
   }
 
-  if (errisErroror) {
+  if (isError) {
     content = (
       <ErrorBlock title="An error occurred" message={error.info?.message || "Failed to fetch events"} />
     );
