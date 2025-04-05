@@ -4,10 +4,10 @@ import { fetchEvents } from '../../util/http';
 
 export default function FindEventSection() {
   const [searchTerm, setSearchTerm] = useState('');
-  const searchElement = useRef(); 
+  const searchElement = useRef();
 
-  const {data, isPending, error, isError} = useQuery({
-    queryKey: ['events', {search: searchTerm}],
+  const { data, isPending, error, isError } = useQuery({
+    queryKey: ['events', { search: searchTerm }],
     queryFn: () => fetchEvents(searchTerm),
   })
 
