@@ -11,7 +11,7 @@ export default function FindEventSection() {
 
   const { data, isPending, error, isError } = useQuery({
     queryKey: ['events', { search: searchTerm }],
-    queryFn: () => fetchEvents(searchTerm),
+    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
   })
 
   function handleSubmit(event) {
@@ -24,8 +24,8 @@ export default function FindEventSection() {
   if (isPending) {
     content = <LoadingIndicator />
   }
-  
-  if(isError) {
+
+  if (isError) {
     content = <ErrorBlock title="An error has accurred!" message={error.info?.message || "Fail to fetch events!"} />
   }
 
