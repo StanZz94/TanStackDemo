@@ -21,8 +21,15 @@ export default function EditEvent() {
     mutationFn: updateEvent,
     onMutate: async (data) => {
       const newData = data.event;
-      await queryClient.cancelQueries({queryKey: ['events', id]})
+      await queryClient.cancelQueries({ queryKey: ['events', id] });
+      const prevEvent = queryClient.getQueryData(['events', id]);
+
       queryClient.setQueryData(['events', id], newData);
+
+      return { prevEvent }
+    },
+    onError: (error, data, context) => {
+      queryClient.setQueryData(['events', id], context.prevEvent);
     }
   });
 
